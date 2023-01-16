@@ -183,6 +183,6 @@ def all_longest_palindromic_substrings_manacher(s: str):
 if __name__ == '__main__':
     #s = "abracadabra"
     #s = 'book'
-    s = 'r'
+    s = 'r111a'
     #longest_palindrome_substring_manacher(s)
     print(all_longest_palindromic_substrings_manacher(s))
