@@ -3,7 +3,7 @@ import math
 import numpy as np
 
 
-def longest_palindrome_substring_slow(s: str):
+def longest_palindrome_substrings_slow(s: str):
     """
     Essentially python implementation of slow algo pseudocode from wikipedia
     :param s: string to be searched for longest palindromic strings
@@ -48,55 +48,7 @@ def longest_palindrome_substring_slow(s: str):
     return lps_results
 
 
-
-def longest_palindrome_substring_manacher(s: str):
-    """
-
-    :param s:
-    :return:
-    """
-    #print(s)
-    s_prime = list('@#' + '#'.join(list(s)) + '#$')
-    pal_radii = list(np.zeros(len(s_prime), dtype=np.int))
-    #print(s_prime)
-
-    max_pal_len = 0
-    start = 0
-    max_right = 0
-    centre = 0
-
-    for pos in range(1, len(s_prime) - 1):
-        if pos < max_right:
-            pal_radii[pos] = min(max_right - pos, pal_radii[2 * centre - pos])
-
-        # expanding along the centre
-        while s_prime[pos + pal_radii[pos] + 1] == s_prime[pos - pal_radii[pos] - 1]:
-            pal_radii[pos] += 1
-
-        # updating centre and its bound
-        if pos + pal_radii[pos] > max_right:
-            centre = pos
-            max_right = pos + pal_radii[pos]
-
-        # updating ans
-        if pal_radii[pos] > max_pal_len:
-            start = int((pos - pal_radii[pos] - 1) / 2)
-            max_pal_len = pal_radii[pos]
-
-
-    # print the longest palindromic substring
-    print("The longest palindromic substring is: ", end="")
-    printSubstring(s, start, start + max_pal_len - 1)
-    return
-
-#
-# A function to print a substring.
-def printSubstring(str, left, right):
-    for i in range(left, right + 1):
-        print(str[i], end="")
-    print("")
-
-def all_longest_palindromic_substrings_manacher(s: str):
+def longest_palindromic_substrings_manacher(s: str):
     """
 
     :param s:
@@ -178,11 +130,9 @@ def all_longest_palindromic_substrings_manacher(s: str):
 
 
 
-
-
 if __name__ == '__main__':
     #s = "abracadabra"
     #s = 'book'
     s = 'r111a'
     #longest_palindrome_substring_manacher(s)
-    print(all_longest_palindromic_substrings_manacher(s))
+    print(longest_palindromic_substrings_manacher(s))
